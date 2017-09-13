@@ -29,6 +29,9 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
         if($select.refreshItems){
           $select.refreshItems();
         }
+        if($select.sizeSearchInput){
+          $select.sizeSearchInput();
+        }
       };
 
       // Remove item from multiple select
@@ -48,6 +51,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
 
         $select.selected.splice(index, 1);
         ctrl.activeMatchIndex = -1;
+        $select.sizeSearchInput();
 
         // Give some time for scope propagation.
         $timeout(function(){
@@ -186,6 +190,11 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
 
       scope.$on('uis:activate', function () {
         $selectMultiple.activeMatchIndex = -1;
+      });
+
+      scope.$watch('$select.disabled', function(newValue, oldValue) {
+        // As the search input field may now become visible, it may be necessary to recompute its size
+        if (oldValue && !newValue) $select.sizeSearchInput();
       });
 
       $select.searchInput.on('keydown', function(e) {
