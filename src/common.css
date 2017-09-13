@@ -352,3 +352,9 @@ body > .ui-select-bootstrap.open {
 .ui-select-refreshing.ng-animate {
   -webkit-animation: none 0s;
 }
+
+/* ui-select-multiple search wrapper */
+.ui-select-search-wrapper {
+  display: block;
+  cursor: text;
+}
