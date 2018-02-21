@@ -35,7 +35,11 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
       };
 
       // Remove item from multiple select
-      ctrl.removeChoice = function(index){
+      ctrl.removeChoice = function(index, event){
+        // do not open the results dropdown
+        if(event) {
+          event.stopPropagation();
+        }
 
         // if the choice is locked, don't remove it
         if($select.isLocked(null, index)) return false;
