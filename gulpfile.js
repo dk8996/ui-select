@@ -83,7 +83,7 @@ gulp.task('styles', ['clean'], function() {
     }))
     .pipe($.concat('select.css'))
     .pipe(gulp.dest('dist'))
-    .pipe($.minifyCss())
+    .pipe($.cleanCss())
     .pipe($.concat('select.min.css'))
     .pipe($.sourcemaps.write('../dist', {debug: true}))
     .pipe(gulp.dest('dist'));
